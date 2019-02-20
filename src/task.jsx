@@ -1,13 +1,14 @@
 import React from 'react';
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import InboxIcon from '@material-ui/icons/Inbox'
+import ListItemText from '@material-ui/core/ListItemText'
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 
 const Container = styled.div`
-  border: 1px solid lightgray;
-  border-raduis: 2px;
-  padding: 8px;
+  padding: 0px;
   margin-bottom: 8px;
-  background-color: white;
 `;
 
 export default class Task extends React.Component {
@@ -20,7 +21,12 @@ export default class Task extends React.Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            {this.props.task.content}
+            <ListItem button>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={this.props.task.content} />
+            </ListItem>
           </Container>
         )}
       </Draggable>

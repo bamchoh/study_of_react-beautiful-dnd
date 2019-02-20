@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import List from '@material-ui/core/List'
 import { Droppable } from 'react-beautiful-dnd';
 import Task from './task';
 
@@ -14,7 +15,6 @@ const Title = styled.h3`
 `;
 
 const TaskList = styled.div`
-  padding: 8px;
 `;
 
 export default class Column extends React.Component {
@@ -22,15 +22,18 @@ export default class Column extends React.Component {
     return (
     <Container>
       <Title>{this.props.column.title}</Title>
+      <List component="nav">
       <Droppable droppableId={this.props.column.id}>
         {provided => (
           <TaskList ref={provided.innerRef} {...provided.droppableProps} >
             {this.props.tasks.map((task, index) => (
               <Task key={task.id} task={task} index={index}/>
             ))}
+            {provided.placeholder}
           </TaskList>
         )}
       </Droppable>
+      </List>
     </Container>
     );
   }
